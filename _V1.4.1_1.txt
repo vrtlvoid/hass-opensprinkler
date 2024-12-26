@@ -4,7 +4,7 @@ thus causing havock for Automations or Scripts that count on those names remaini
 Entities like "FY-P00-MWFS-S00toS06-1AM" Program Running become "OpenSprinkler FrontYard P00 Program Running"
 where "OpenSprinkler FrontYard" is the unique Controller ID assigend when the HA OpenSprinkler
 integration is created. This also avoids duplicate Entity IDs being created when there are mulitple OpenSprinkler
-Controllers in a single HA instance and the user has identical Station Names like "Graden Sprinklers" applied
-to more than 1 Controller.
+Controllers within a single HA instance and the user has decided to select identical Station Names 
+like "Garden Sprinklers" in more than 1 Controller.
 
-2) Ensure time realted variable work corrently on 64bit OS versions
+2) Ensure time related variables work corrently on 64bit OS versions
