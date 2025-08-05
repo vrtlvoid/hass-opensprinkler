@@ -4,7 +4,7 @@ import logging
 from typing import Callable
 
 from homeassistant.components.text import TextEntity
-from homeassistant.const import CONF_NAME
+from homeassistant.const import CONF_NAME, EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.util import slugify
 
@@ -55,6 +55,11 @@ class ProgramNameText(OpenSprinklerProgramEntity, OpenSprinklerText, TextEntity)
     #    return f"{self._program.name} Program Name"
     
     # <JRJ> Modified 2024-03-02: Name with controller ID e.g. FY-P00-MWFS-S00toS06-1AM Program Name==> OpenSprinkler FrontYard P00 Program Name    
+    @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.CONFIG
+
     @property
     def name(self) -> str:
         """Return the name of this text."""

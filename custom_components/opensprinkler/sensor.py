@@ -4,7 +4,7 @@ import logging
 from typing import Callable
 
 from homeassistant.components.sensor import SensorDeviceClass
-from homeassistant.const import CONF_NAME
+from homeassistant.const import CONF_NAME, EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity import Entity
 from homeassistant.util import slugify
@@ -77,6 +77,11 @@ class WaterLevelSensor(OpenSprinklerControllerEntity, OpenSprinklerSensor, Entit
         super().__init__(entry, name, coordinator)
 
     @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.DIAGNOSTIC
+
+    @property
     def icon(self) -> str:
         """Return icon."""
         return "mdi:water-percent"
@@ -143,6 +148,16 @@ class FlowRateSensor(OpenSprinklerControllerEntity, OpenSprinklerSensor, Entity)
         super().__init__(entry, name, coordinator)
 
     @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.DIAGNOSTIC
+
+    @property
+    def device_class(self):
+        """Return the device class."""
+        return SensorDeviceClass.VOLUME_FLOW_RATE
+
+    @property
     def icon(self) -> str:
         """Return icon."""
         return "mdi:speedometer"
@@ -178,6 +193,11 @@ class LastRunSensor(OpenSprinklerControllerEntity, OpenSprinklerSensor, Entity):
         self._controller = controller
         self._entity_type = "sensor"
         super().__init__(entry, name, coordinator)
+
+    @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.DIAGNOSTIC
 
     @property
     def device_class(self):
@@ -244,6 +264,11 @@ class RainDelayStopTimeSensor(
         super().__init__(entry, name, coordinator)
 
     @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.DIAGNOSTIC
+
+    @property
     def device_class(self):
         """Return the device class."""
         return SensorDeviceClass.TIMESTAMP
@@ -287,6 +312,11 @@ class PauseEndTimeSensor(OpenSprinklerControllerEntity, OpenSprinklerSensor, Ent
         self._entity_type = "sensor"
         self._controller = controller
         super().__init__(entry, name, coordinator)
+
+    @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.DIAGNOSTIC
 
     @property
     def device_class(self):
@@ -345,6 +375,27 @@ class StationStatusSensor(OpenSprinklerStationEntity, OpenSprinklerSensor, Entit
 
     # <JRJ> Modified 2024-03-02: Name with controller ID e.g. FY-S00-NorthSideCedars Station Status ==> OpenSprinkler FrontYard S00 Station Status
     @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.DIAGNOSTIC
+
+    @property
+    def device_class(self):
+        return SensorDeviceClass.ENUM
+
+    @property
+    def options(self) -> list[str]:
+        """A list of available options as strings"""
+        return [
+            "idle",
+            "manual",
+            "master_engaged",
+            "once_program",
+            "program",
+            "waiting",
+        ]
+
+    @property
     def name(self) -> str:
         """Return the name of the sensor."""
         result = self._name + " S" + str(f'{self._station.index:02}') + " Station Status"
@@ -394,6 +445,15 @@ class CurrentDrawSensor(OpenSprinklerControllerEntity, OpenSprinklerSensor, Enti
         super().__init__(entry, name, coordinator)
 
     @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.DIAGNOSTIC
+
+    @property
+    def device_class(self):
+        return SensorDeviceClass.CURRENT
+
+    @property
     def icon(self) -> str:
         """Return icon."""
         return "mdi:meter-electric-outline"
@@ -431,6 +491,11 @@ class ControllerCurrentTimeSensor(
         self._controller = controller
         self._entity_type = "sensor"
         super().__init__(entry, name, coordinator)
+
+    @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.DIAGNOSTIC
 
     @property
     def device_class(self):

@@ -4,7 +4,7 @@ import logging
 from typing import Callable
 
 from homeassistant.components.select import SelectEntity
-from homeassistant.const import CONF_NAME
+from homeassistant.const import CONF_NAME, EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.util import slugify
 
@@ -73,6 +73,11 @@ class ProgramRestrictionsSelect(
     #    return f"{self._program.name} Restrictions"
 
     # <JRJ> Modified 2024-03-02: Name with controller ID e.g. FY-P00-MWFS-S00toS06-1AM Restrictions==> OpenSprinkler FrontYard P00 Restrictions    
+    @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.CONFIG
+
     @property
     def name(self) -> str:
         """Return the name of this select."""
@@ -143,6 +148,11 @@ class ProgramTypeSelect(OpenSprinklerProgramEntity, OpenSprinklerSelect, SelectE
 
     # <JRJ> Modified 2024-03-02: Name with controller ID e.g. FY-P00-MWFS-S00toS06-1AM Type==> OpenSprinkler FrontYard P00 Type    
     @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.CONFIG
+
+    @property
     def name(self) -> str:
         """Return the name of this select."""
         result = self._name + " P" + str(f'{self._program.index:02}') + " Type"         
@@ -209,6 +219,11 @@ class ProgramAdditionalStartTimeTypeSelect(
     #    return f"{self._program.name} Additional Start Time Type"
 
     # <JRJ> Modified 2024-03-02: Name with controller ID e.g. FY-P00-MWFS-S00toS06-1AM Additional Start Time Type==> OpenSprinkler FrontYard P00 Additional Start Time Type    
+    @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.CONFIG
+
     @property
     def name(self) -> str:
         """Return the name of this select."""
@@ -278,6 +293,11 @@ class ProgramStartTimeOffsetTypeSelect(
     #    return f"{self._program.name} Start{start} Time Offset Type"
     
     # <JRJ> Modified 2024-03-02: Name with controller ID e.g. FY-P00-MWFS-S00toS06-1AM Start00 Time Offset Type==> OpenSprinkler FrontYard P00 Start00 Time Offset Type  
+    @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.CONFIG
+
     @property
     def name(self) -> str:
         """Return the name of this select."""

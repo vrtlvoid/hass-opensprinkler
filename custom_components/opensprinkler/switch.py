@@ -1,7 +1,7 @@
 from typing import Callable
 
 from homeassistant.components.switch import SwitchEntity
-from homeassistant.const import CONF_NAME
+from homeassistant.const import CONF_NAME, EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.util import slugify
 from homeassistant.util.dt import utc_from_timestamp
@@ -219,6 +219,11 @@ class ProgramWeekdaySwitch(
 
     # <JRJ> Modified 2024-03-02: Name with controller ID e.g. FY-P00-MWFS-S00toS06-1AM Monday Enabled ==> OpenSprinkler FrontYard P00 Monday Enabled
     @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.CONFIG
+
+    @property
     def name(self) -> str:
         """Return the name of the switch."""
         result = self._name + " P" + str(f'{self._program.index:02}') + f" {self._weekday} Enabled"
@@ -272,6 +277,11 @@ class ProgramUseWeatherSwitch(
         self._entity_type = "switch"
         super().__init__(entry, name, coordinator)
 
+    @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.CONFIG
+        
     # <JRJ> Original Code
     #@property
     #def name(self):
@@ -329,7 +339,6 @@ class StationEnabledSwitch(
         self._station = station
         self._entity_type = "switch"
         super().__init__(entry, name, coordinator)
-
 
     
     # <JRJ> Original Code

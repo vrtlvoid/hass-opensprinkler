@@ -3,8 +3,8 @@
 import logging
 from typing import Callable
 
-from homeassistant.components.number import NumberEntity
-from homeassistant.const import CONF_NAME
+from homeassistant.components.number import NumberDeviceClass, NumberEntity
+from homeassistant.const import CONF_NAME, EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.util import slugify
 
@@ -77,6 +77,16 @@ class ProgramDurationNumber(
     #    return f"{self._program.name} {self._station.name} Station Duration"
 
     # <JRJ> Modified 2024-03-02: Name with controller ID e.g. FY-P00-MWFS-S00toS06-1AM Station Duration==> OpenSprinkler FrontYard P00 Station Duration
+    @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.CONFIG
+
+    @property
+    def device_class(self):
+        """Return the device class."""
+        return NumberDeviceClass.DURATION
+
     @property
     def name(self) -> str:
         """Return the name of this sensor."""        
@@ -153,6 +163,16 @@ class ProgramIntervalDaysNumber(
     
     # <JRJ> Modified 2024-03-02: Name with controller ID e.g. FY-P00-MWFS-S00toS06-1AM Interval Days==> OpenSprinkler FrontYard P00 Interval Days
     @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.CONFIG
+
+    @property
+    def device_class(self):
+        """Return the device class."""
+        return NumberDeviceClass.DURATION
+
+    @property
     def name(self) -> str:
         """Return the name of this number."""
         result = self._name + " P" + str(f'{self._program.index:02}') + " Interval Days"         
@@ -226,6 +246,16 @@ class ProgramStartingInDaysNumber(
     #    return f"{self._program.name} Starting In Days"
         
     # <JRJ> Modified 2024-03-02: Name with controller ID e.g. FY-P00-MWFS-S00toS06-1AM Starting In Days==> OpenSprinkler FrontYard P00 Starting In Days    
+    @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.CONFIG
+
+    @property
+    def device_class(self):
+        """Return the device class."""
+        return NumberDeviceClass.DURATION
+
     @property
     def name(self) -> str:
         """Return the name of this number."""
@@ -301,6 +331,16 @@ class ProgramStartTimeOffsetNumber(
     #    return f"{self._program.name} Start{start} Time Offset"
 
     # <JRJ> Modified 2024-03-02: Name with controller ID e.g. FY-P00-MWFS-S00toS06-1AM Start1 Time Offset==> OpenSprinkler FrontYard P00 Start1 Time Offset  
+    @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.CONFIG
+
+    @property
+    def device_class(self):
+        """Return the device class."""
+        return NumberDeviceClass.DURATION
+
     @property
     def name(self) -> str:
         """Return the name of this number."""
@@ -400,6 +440,11 @@ class ProgramStartTimeRepeatCountNumber(
 
     # <JRJ> Modified 2024-03-02: Name with controller ID e.g. FY-P00-MWFS-S00toS06-1AM Start Time Repeat Count==> OpenSprinkler FrontYard P00 Start Time Repeat Count    
     @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.CONFIG
+
+    @property
     def name(self) -> str:
         """Return the name of this number."""
         result = self._name + " P" + str(f'{self._program.index:02}') + " Start Time Repeat Count"         
@@ -472,6 +517,16 @@ class ProgramStartTimeRepeatIntervalNumber(
     #   return f"{self._program.name} Start Time Repeat Interval"
     
     # <JRJ> Modified 2024-03-02: Name with controller ID e.g. FY-P00-MWFS-S00toS06-1AM Start Time Repeat Interval==> OpenSprinkler FrontYard P00 Start Time Repeat Interval    
+    @property
+    def entity_category(self):
+        """Return the entity category."""
+        return EntityCategory.CONFIG
+
+    @property
+    def device_class(self):
+        """Return the device class."""
+        return NumberDeviceClass.DURATION
+
     @property
     def name(self) -> str:
         """Return the name of this number."""
